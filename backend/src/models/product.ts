@@ -3,10 +3,6 @@ import { trim } from "validator";
 
 const schema = new mongoose.Schema(
   {
-    _id: {
-      type: String,
-      required: [true, "Please Enter Id"],
-    },
     name: {
       type: String,
       required: [true, "Please Enter Name"],
@@ -17,7 +13,7 @@ const schema = new mongoose.Schema(
     },
 
     price: {
-      type: String,
+      type: Number,
       required: [true, "Please Enter Price"],
     },
 

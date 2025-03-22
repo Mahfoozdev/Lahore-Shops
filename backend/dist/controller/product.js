@@ -6,11 +6,12 @@ export const newProduct = TryCatch(async (req, res, next) => {
     await Product.create({
         name,
         stock,
+        price,
         photo: photo?.path,
         category: category.toLocaleLowerCase(),
     });
     return res.status(201).json({
         success: true,
-        message: "product Created succesfully",
+        message: "product Created successfully",
     });
 });
