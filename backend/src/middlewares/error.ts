@@ -21,3 +21,15 @@ export const TryCatch =
   (req: Request, res: Response, next: NextFunction) => {
     return Promise.resolve(func(req, res, next)).catch(next);
   };
+
+type AsyncHandler<T = any> = (
+  req: Request<T>,
+  res: Response,
+  next: NextFunction
+) => Promise<any>;
+
+export const TryCatchId = <T = any>(controller: AsyncHandler<T>) => {
+  return (req: Request<T>, res: Response, next: NextFunction) => {
+    Promise.resolve(controller(req, res, next)).catch(next);
+  };
+};
