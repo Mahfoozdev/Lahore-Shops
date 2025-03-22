@@ -1,0 +1,16 @@
+import { TryCatch } from "../middlewares/error.js";
+import { Product } from "../models/product.js";
+export const newProduct = TryCatch(async (req, res, next) => {
+    const { name, stock, price, category } = req.body;
+    const photo = req.file;
+    await Product.create({
+        name,
+        stock,
+        photo: photo?.path,
+        category: category.toLocaleLowerCase(),
+    });
+    return res.status(201).json({
+        success: true,
+        message: "product Created succesfully",
+    });
+});
