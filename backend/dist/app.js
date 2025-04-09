@@ -2,9 +2,11 @@ import express from "express";
 import { connectDB } from "./utils/features.js";
 import userRoute from "./routes/user.js";
 import productRoute from "./routes/product.js";
+import NodeCache from "node-cache";
 import { errorHandlerMiddleware } from "./middlewares/error.js";
 const port = 4000;
 connectDB();
+export const nodeCache = new NodeCache();
 const app = express();
 app.use(express.json());
 app.get("/", (req, res) => {
