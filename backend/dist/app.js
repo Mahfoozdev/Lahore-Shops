@@ -7,16 +7,19 @@ import NodeCache from "node-cache";
 import { errorHandlerMiddleware } from "./middlewares/error.js";
 import { config } from "dotenv";
 import morgan from "morgan";
+import cors from "cors";
 config({
     path: "./.env",
 });
 const port = process.env.PORT || 4000;
+const frontendApi = process.env.FRONTEND_API;
 const mongoURI = process.env.MONGO_URI || "";
 connectDB(mongoURI);
 export const myCache = new NodeCache();
 const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(cors());
 app.get("/", (req, res) => {
     res.send("Api working.");
 });
