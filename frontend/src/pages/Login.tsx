@@ -33,7 +33,7 @@ const SignUp = () => {
         setMyError(message);
       }
     } catch (error) {
-      setMyError("Login FAiled");
+      setMyError("Login Failed");
     }
   };
   return (

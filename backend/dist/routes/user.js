@@ -5,6 +5,6 @@ const app = express.Router();
 //route- api/v1/user
 app.post("/new", newUser);
 app.get("/all", getAllUsers);
-app.get("/:id", adminOnly, getUser);
+app.get("/:id", getUser);
 app.delete("/:id", adminOnly, deleteUser);
 export default app;
