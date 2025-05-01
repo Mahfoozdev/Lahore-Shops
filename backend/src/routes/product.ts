@@ -18,10 +18,10 @@ const app = express.Router();
 app.post("/new", adminOnly, singleUpload, newProduct as RequestHandler);
 app.get("/latest", getLatestProduct as RequestHandler);
 app.get("/categories", getAllCategories as RequestHandler);
+app.get("/all-products", allProducts as RequestHandler);
+app.get("/admin-products", adminOnly, adminProducts as RequestHandler);
+app.delete("/delete-product", adminOnly, deleteProduct as RequestHandler);
 app.put("/:id", updateProduct as RequestHandler);
 app.get("/:id", singleProduct as RequestHandler);
-app.get("/all-products", allProducts as RequestHandler);
-app.get("/admin-products", adminProducts as RequestHandler);
-app.delete("/delete-product", adminOnly, deleteProduct as RequestHandler);
 
 export default app;

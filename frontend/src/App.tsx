@@ -23,6 +23,8 @@ const SignUp = lazy(() => import("./pages/Login"));
 const Orders = lazy(() => import("./pages/Orders"));
 const Shipping = lazy(() => import("./pages/Shipping"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
+const CreateProduct = lazy(() => import("./pages/admin/product/CreateProduct"));
+const Products = lazy(() => import("./pages/admin/Products"));
 
 function App() {
   const dispatch = useDispatch();
@@ -81,6 +83,14 @@ function App() {
             }
           >
             <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route
+              path="/admin/product/new-product"
+              element={<CreateProduct />}
+            />
+            <Route
+              path="/admin/product/admin-products"
+              element={<Products />}
+            />
           </Route>
           {/* admin routes */}
         </Routes>
