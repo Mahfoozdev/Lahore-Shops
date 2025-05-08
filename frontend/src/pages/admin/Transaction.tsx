@@ -1,14 +1,14 @@
 import { ReactElement, useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
+import { useAllOrdersQuery } from "../../redux/api/orderApi";
+import { UserReducerInitialState } from "../../types/reducer-types";
 import { Link } from "react-router-dom";
 import { TableColumn } from "react-data-table-component";
-import { UserReducerInitialState } from "../types/reducer-types";
-import { useMyOrdersQuery } from "../redux/api/orderApi";
-import Loader from "../components/Loader";
-import TableHOC from "../components/TableHOC";
+import TableHOC from "../../components/TableHOC";
+import Loader from "../../components/Loader";
 
 interface DataType {
-  _id: string;
+  user: string;
   amount: number;
   discount: number;
   quantity: number;
@@ -18,8 +18,8 @@ interface DataType {
 
 const columns: TableColumn<DataType>[] = [
   {
-    name: "ID",
-    selector: (row) => row._id,
+    name: "User",
+    selector: (row) => row.user,
   },
   {
     name: "Amount",
@@ -43,18 +43,18 @@ const columns: TableColumn<DataType>[] = [
   },
 ];
 
-const Orders = () => {
+const Transaction = () => {
   const { user } = useSelector(
     (state: { userReducer: UserReducerInitialState }) => state.userReducer
   );
 
-  const { data, isLoading, isError, error } = useMyOrdersQuery(user?._id!);
+  const { data, isLoading, isError, error } = useAllOrdersQuery(user?._id!);
   const [rows, setRows] = useState<DataType[]>([]);
 
   useEffect(() => {
     if (data) {
       const mapped: DataType[] = data.orders.map((i: any) => ({
-        _id: i._id,
+        user: i.user.name,
         amount: i.total,
         discount: i.discount,
         quantity: i.orderItems.length,
@@ -89,7 +89,7 @@ const Orders = () => {
       <TableHOC<DataType>
         columns={columns}
         data={rows}
-        containerClassName="my-order-box"
+        containerClassName="dashboard-order-box"
         heading="Orders"
       />
     ),
@@ -107,4 +107,4 @@ const Orders = () => {
   return <div>{Table()}</div>;
 };
 
-export default Orders;
+export default Transaction;

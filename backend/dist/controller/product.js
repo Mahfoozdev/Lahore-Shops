@@ -70,17 +70,19 @@ export const updateProduct = TryCatchId(async (req, res, next) => {
         rm(product?.photo, () => {
             console.log("old photo deleted");
         });
-        product?.photo != photo.path;
+        product.photo = photo.path;
     }
     if (name)
-        product?.name != name;
+        product.name = name;
     if (category)
-        product?.category != category;
+        product.category = category;
     if (price)
-        product?.price != price;
+        product.price = price;
     if (stock)
-        product?.stock != stock;
+        product.stock = stock;
     await product?.save();
+    console.log("Received body:", req.body);
+    console.log("Received file:", req.file);
     await invalidateCache({ product: true, productId: String(product._id) });
     return res.status(200).json({
         success: true,
@@ -95,7 +97,7 @@ export const singleProduct = TryCatchId(async (req, res, next) => {
         product = JSON.parse(myCache.get(`product-${id}`));
     }
     else {
-        product = await Product.findById({ id });
+        product = await Product.findById(id);
         if (!product)
             return next(new ErrorHandler("Product was not found", 404));
         myCache.set(`product-${id}`, JSON.stringify(product));
@@ -108,13 +110,13 @@ export const singleProduct = TryCatchId(async (req, res, next) => {
 // delete Product   api controller
 export const deleteProduct = TryCatchId(async (req, res, next) => {
     const { id } = req.params;
-    const product = await Product.findById({ id });
+    const product = await Product.findById(id);
     if (!product)
         return next(new ErrorHandler("Product was not found", 404));
     rm(product.photo, () => {
         console.log(" Product Photo Deleted");
     });
-    await Product.deleteOne;
+    await Product.deleteOne({ _id: id });
     await invalidateCache({ product: true, productId: String(product._id) });
     return res.status(200).json({
         success: true,

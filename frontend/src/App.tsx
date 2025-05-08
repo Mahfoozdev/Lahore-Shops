@@ -25,6 +25,10 @@ const Shipping = lazy(() => import("./pages/Shipping"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
 const CreateProduct = lazy(() => import("./pages/admin/product/CreateProduct"));
 const Products = lazy(() => import("./pages/admin/Products"));
+const UpdateProduct = lazy(() => import("./pages/admin/product/UpdateProduct"));
+const Transaction = lazy(() => import("./pages/admin/Transaction"));
+const OrderManagement = lazy(() => import("./pages/admin/OrderManagement"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +58,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/terms-and-conditions" element={<Terms />} />
+          <Route path="*" element={<NotFound />} />
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           {/* not logged in  Route */}
@@ -87,10 +92,14 @@ function App() {
               path="/admin/product/new-product"
               element={<CreateProduct />}
             />
+
             <Route
               path="/admin/product/admin-products"
               element={<Products />}
             />
+            <Route path="/admin/product/:id" element={<UpdateProduct />} />
+            <Route path="/admin/orders" element={<Transaction />} />
+            <Route path="/admin/order/:id" element={<OrderManagement />} />
           </Route>
           {/* admin routes */}
         </Routes>

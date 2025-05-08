@@ -1,7 +1,7 @@
 import { signOut } from "firebase/auth";
 import { User } from "../types/types";
 import { auth } from "../firebase";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 interface PropsTypes {
@@ -26,12 +26,14 @@ const Header = ({ user }: PropsTypes) => {
     <div className="flex gap-32 font-bold w-full justify-center py-10 text-xl font-secondary">
       <div>{user && user.name}</div>
       <div>{user && user.email}</div>
-
+      <Link to="/cart" className="font-bold">
+        Cart
+      </Link>
       <div>{user ? "user is logged in " : "user not logged in"}</div>
       <div className="flex items-center gap-5">
         {user && (
           <button
-            className="bg-amber-700 text-white p-3 cursor-pointer"
+            className="bg-primary text-white px-2 py-1 rounded cursor-pointer"
             onClick={logoutHandler}
           >
             Log out
@@ -48,7 +50,13 @@ const Header = ({ user }: PropsTypes) => {
             </Link>
           )}
         </div>
-        {user && <img src={user.photo} alt="" className="rounded-full" />}
+        {user && (
+          <img
+            src={user.photo}
+            alt=""
+            className="rounded-full h-14 object-cover"
+          />
+        )}
       </div>
     </div>
   );

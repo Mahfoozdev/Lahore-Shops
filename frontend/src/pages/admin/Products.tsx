@@ -1,4 +1,4 @@
-import { ReactElement, useCallback, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import TableHOC from "../../components/TableHOC";
 import { TableColumn } from "react-data-table-component";
 import { useAllProductsQuery } from "../../redux/api/productAPI";
@@ -12,6 +12,7 @@ import Loader from "../../components/Loader";
 interface DataType {
   photo: ReactElement;
   name: string;
+  category: string;
   price: number;
   stock: number;
   action: ReactElement;
@@ -33,6 +34,10 @@ const columns: TableColumn<DataType>[] = [
   {
     name: "Price",
     selector: (row) => row.price,
+  },
+  {
+    name: "Category",
+    selector: (row) => row.category,
   },
   {
     name: "Action",
@@ -61,9 +66,10 @@ const Products = () => {
         name: i.name,
         stock: i.stock,
         price: i.price,
+        category: i.category,
         action: (
           <Link
-            className="bg-primary rounded text-white font-bold px-3 py-1 tracking-wider"
+            className="bg-primary rounded text-white font-bold px-3 py-1 tracking-wider hover:bg-secondary transition-all duration-200"
             to={`/admin/product/${i._id}`}
           >
             Manage
@@ -74,21 +80,22 @@ const Products = () => {
     }
   }, [data]);
 
-  const Table = useCallback(
-    () =>
-      TableHOC<DataType>(columns, rows, "dashboard-product-box", "Products"),
-    [rows]
-  );
-
   if (isLoading) return <Loader />;
   if (isError)
     return (
-      <p>
+      <div>
         Error: {(error as CustomError).data.message || "Something went wrong"}
-      </p>
+      </div>
     );
 
-  return <div>{Table()}</div>;
+  return (
+    <TableHOC<DataType>
+      columns={columns}
+      data={rows}
+      containerClassName="dashboard-product-box"
+      heading="Products"
+    />
+  );
 };
 
 export default Products;
