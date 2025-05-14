@@ -1,0 +1,10 @@
+.myCategories {
+  span {
+    display: none;
+  }
+}
+.myCategories:hover {
+  span {
+    display: block;
+  }
+}

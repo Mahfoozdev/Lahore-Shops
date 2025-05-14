@@ -44,7 +44,7 @@ const CreateProduct = () => {
     formData.set("photo", photo);
 
     const res = await newProduct({ id: user?._id!, formData });
-    responseToast(res, navigate, "/");
+    responseToast(res, navigate, "/admin/product/admin-products");
   };
 
   return (

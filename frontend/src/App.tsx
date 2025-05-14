@@ -1,5 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Loader from "./components/Loader";
 import ScrollToTop from "./components/ScrollToTop";
 import Header from "./components/Header";
@@ -11,6 +13,7 @@ import { getUser } from "./redux/api/userAPI";
 import { UserReducerInitialState } from "./types/reducer-types";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Payment from "./pages/Payment";
 
 const Home = lazy(() => import("./pages/Home"));
 const Search = lazy(() => import("./pages/Search"));
@@ -51,6 +54,12 @@ function App() {
     <Router>
       <ScrollToTop>
         <Header user={user} />
+        <ToastContainer
+          position="bottom-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop
+        />
         <Suspense fallback={<Loader />} />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -58,6 +67,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/terms-and-conditions" element={<Terms />} />
+          <Route path="/pay" element={<Payment />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/cookies" element={<Cookies />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

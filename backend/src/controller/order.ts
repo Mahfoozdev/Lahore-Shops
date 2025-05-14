@@ -12,26 +12,41 @@ import { myCache } from "../app.js";
 
 export const newOrder = TryCatch(
   async (req: Request<{}, {}, NewOrderRequestBody>, res, next) => {
+    console.log("Received req.body:", req.body);
     const {
       shippingInfo,
       shippingCharges,
       tax,
       discount,
-      subTotal,
+      subtotal,
+      paymentStatus,
       total,
       user,
       orderItems,
     } = req.body;
 
-    if (!shippingInfo || !tax || !subTotal || total || !user || !orderItems) {
-      return next(new ErrorHandler("All Fields did not get", 400));
+    if (
+      !shippingInfo ||
+      tax === undefined ||
+      subtotal === undefined ||
+      total === undefined ||
+      !user ||
+      !orderItems ||
+      !Array.isArray(orderItems) ||
+      orderItems.length === 0
+    ) {
+      return next(
+        new ErrorHandler("All required fields must be provided", 400)
+      );
     }
+
     const order = await Order.create({
       shippingInfo,
       shippingCharges,
       tax,
+      paymentStatus,
       discount,
-      subTotal,
+      subtotal,
       total,
       user,
       orderItems,

@@ -8,6 +8,10 @@ export interface NewUserRequestBody {
   gender: string;
   dob: Date;
 }
+
+export interface NewPaymentRequestBody {
+  amount: number;
+}
 export interface NewProductRequestBody {
   name: string;
   category: string;
@@ -66,8 +70,9 @@ export type ShippingInfoType = {
 
 export interface NewOrderRequestBody {
   shippingInfo: ShippingInfoType;
+  paymentStatus: string;
   user: string;
-  subTotal: number;
+  subtotal: number;
   tax: number;
   shippingCharges: number;
   total: number;

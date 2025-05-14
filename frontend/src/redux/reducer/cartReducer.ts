@@ -57,7 +57,26 @@ export const cartReducer = createSlice({
       );
       state.loading = false;
     },
+    calculatePrice: (state) => {
+      // Calculate subtotal
+      state.subtotal = state.cartItems.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0
+      );
+
+      // Flat discount rule: e.g., Rs. 100 off if subtotal > 1000
+      state.discount = 0;
+
+      state.tax = 0;
+
+      state.shippingCharges = state.subtotal > 500 ? 0 : 50;
+
+      // Final total
+      state.total =
+        state.subtotal - state.discount + state.tax + state.shippingCharges;
+    },
   },
 });
 
-export const { addToCart, removeCartItem } = cartReducer.actions;
+export const { addToCart, removeCartItem, calculatePrice } =
+  cartReducer.actions;

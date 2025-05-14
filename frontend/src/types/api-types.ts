@@ -1,8 +1,21 @@
-import { CartItems, Order, Product, ShippingInfo, User } from "./types";
+import {
+  CartItems,
+  Order,
+  OrderItems,
+  Product,
+  ShippingInfo,
+  User,
+} from "./types";
 
 export type MessageResponse = {
   success: boolean;
   message: string;
+};
+export type PaymentMessageResponse = {
+  success: boolean;
+  message: string;
+  postUrl: string;
+  payload: Record<string, string>;
 };
 
 export type UserResponse = {
@@ -56,16 +69,20 @@ export type CustomError = {
 
 export type NewOrderRequest = {
   shippingInfo: ShippingInfo;
-  loading: boolean;
-  orderItems: CartItems[];
+  loading?: boolean;
+  orderItems: OrderItems[];
   subtotal: number;
   tax: number;
   shippingCharges: number;
   discount: number;
   total: number;
   user: string;
+  paymentStatus: string;
+  status: "Processing" | "Shipped" | "Delivered";
 };
-
+export type NewPaymentRequest = {
+  amount: number;
+};
 export type AllOrdersResponse = {
   success: boolean;
   orders: Order[];

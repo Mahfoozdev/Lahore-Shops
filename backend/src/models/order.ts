@@ -24,7 +24,7 @@ const schema = new mongoose.Schema(
       },
 
       pinCode: {
-        type: Number,
+        type: String,
         required: [true, "Please Enter Pin-Code or Postal-Code of your area"],
       },
     },
@@ -33,7 +33,7 @@ const schema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    subTotal: {
+    subtotal: {
       type: Number,
       required: true,
     },
@@ -57,6 +57,10 @@ const schema = new mongoose.Schema(
       type: String,
       enum: ["Processing", "Shipped", "Delivered"],
       default: "Processing",
+    },
+    paymentStatus: {
+      type: String,
+      enum: ["onlinePaid", "cashOnDelivery"],
     },
     orderItems: [
       {

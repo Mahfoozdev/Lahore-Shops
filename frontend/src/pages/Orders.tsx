@@ -25,10 +25,7 @@ const columns: TableColumn<DataType>[] = [
     name: "Amount",
     selector: (row) => row.amount,
   },
-  {
-    name: "Discount",
-    selector: (row) => row.discount,
-  },
+
   {
     name: "Quantity",
     selector: (row) => row.quantity,
@@ -55,8 +52,7 @@ const Orders = () => {
     if (data) {
       const mapped: DataType[] = data.orders.map((i: any) => ({
         _id: i._id,
-        amount: i.total,
-        discount: i.discount,
+        amount: <p className="font-bold">Rs. {i.total}</p>,
         quantity: i.orderItems.length,
         status: (
           <p
@@ -74,7 +70,7 @@ const Orders = () => {
         action: (
           <Link
             className="bg-primary rounded text-white font-bold px-3 py-1 tracking-wider hover:bg-secondary transition-all duration-200"
-            to={`/admin/order/${i._id}`}
+            to={`/order/${i._id}`}
           >
             Manage
           </Link>
@@ -90,7 +86,7 @@ const Orders = () => {
         columns={columns}
         data={rows}
         containerClassName="my-order-box"
-        heading="Orders"
+        heading={`${user?.name}'s Orders List`}
       />
     ),
     [rows]
