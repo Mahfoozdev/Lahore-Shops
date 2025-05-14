@@ -1,0 +1,21 @@
+.custom-carousel .p-carousel-content {
+  justify-content: center !important;
+  display: flex;
+  gap: 1rem;
+}
+
+.custom-carousel .p-carousel-item {
+  display: flex;
+  justify-content: center;
+}
+
+.custom-carousel .p-carousel-prev,
+.custom-carousel .p-carousel-next {
+  top: 50% !important;
+  transform: translateY(-50%);
+  background-color: #6c48b6;
+  color: white;
+  border-radius: 9999px;
+  padding: 0.5rem;
+  z-index: 10;
+}

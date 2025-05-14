@@ -1,92 +1,105 @@
-import { Button } from "primereact/button";
 import { Carousel } from "primereact/carousel";
-import { Tag } from "primereact/tag";
-import { useState } from "react";
-import { useSearchProductsQuery } from "../redux/api/productAPI";
+import { useLatestProductsQuery } from "../redux/api/productAPI";
+import { BsCart2 } from "react-icons/bs";
+import { CiShoppingTag } from "react-icons/ci";
+import { server } from "../redux/store";
+import { useDispatch } from "react-redux";
+import { CartItems } from "../types/types";
+import { addToCart } from "../redux/reducer/cartReducer";
+import { toast } from "react-toastify";
+import "../styles/productCarosel.css";
+import ProductSkeleton from "./ProductSkeleton";
 
 const ProductCarousel = () => {
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("");
-  const [category, setCategory] = useState("");
-  const [price, setPrice] = useState(0);
-  const [page, setPage] = useState(0);
-
-  const { data } = useSearchProductsQuery({
-    search,
-    sort,
-    category,
-    price,
-    page,
-  });
+  const { data, isLoading, isError } = useLatestProductsQuery("");
+  if (isError) {
+    toast.error("Cannot fetch Products");
+  }
 
   const products = data?.products || [];
 
   const responsiveOptions = [
-    {
-      breakpoint: "1400px",
-      numVisible: 2,
-      numScroll: 1,
-    },
-    {
-      breakpoint: "1199px",
-      numVisible: 3,
-      numScroll: 1,
-    },
-    {
-      breakpoint: "767px",
-      numVisible: 2,
-      numScroll: 1,
-    },
-    {
-      breakpoint: "575px",
-      numVisible: 1,
-      numScroll: 1,
-    },
+    { breakpoint: "1400px", numVisible: 4, numScroll: 1 },
+    { breakpoint: "1199px", numVisible: 3, numScroll: 1 },
+    { breakpoint: "1000px", numVisible: 2, numScroll: 1 },
+    { breakpoint: "767px", numVisible: 2, numScroll: 1 },
+    { breakpoint: "575px", numVisible: 1, numScroll: 1 },
   ];
+  const dispatch = useDispatch();
+  const addToCartHandler = (cartItem: CartItems) => {
+    if (cartItem.stock < 1) return toast.error("Out Of Stock");
+    dispatch(addToCart(cartItem));
 
-  const getSeverity = (product: any) => {
-    switch (product.inventoryStatus) {
-      case "INSTOCK":
-        return "success";
-      case "LOWSTOCK":
-        return "warning";
-      case "OUTOFSTOCK":
-        return "danger";
-      default:
-        return null;
-    }
+    toast.success("Item Added to Cart");
   };
 
   const productTemplate = (product: any) => {
     return (
-      <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
-        <div className="mb-3">
-          <img
-            src={product.image} // assume image is full URL; otherwise prepend your base URL
-            alt={product.name}
-            className="w-6 shadow-2"
-          />
-        </div>
-        <div>
-          <h4 className="mb-1">{product.name}</h4>
-          <h6 className="mt-0 mb-3">${product.price}</h6>
-          <Tag
-            value={product.inventoryStatus}
-            severity={getSeverity(product)}
-          ></Tag>
-          <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
-            <Button icon="pi pi-search" className="p-button p-button-rounded" />
-            <Button
-              icon="pi pi-star-fill"
-              className="p-button-success p-button-rounded"
-            />
+      <div
+        key={product._id}
+        className="border-[1px] w-[95%] border-[rgba(0,0,0,0.1)]  p-3 flex flex-col items-center"
+      >
+        <main className="flex items-center justify-between w-full pb-5 pt-2">
+          <div className="flex items-center gap-2">
+            <CiShoppingTag className="text-lg" />
+            <p className="uppercase text-sm tracking-wide">
+              {product.category}
+            </p>
           </div>
+          <div
+            className={`${
+              product.stock > 0 ? "bg-green-500" : "bg-red-500"
+            } w-fit px-2 py-1 rounded text-white font-semibold text-xs tracking-wider`}
+          >
+            {product.stock > 0 ? "INSTOCK" : "OUTOFSTOCK"}
+          </div>
+        </main>
+
+        <img
+          src={`${server}/${product.photo}`}
+          alt={product.name}
+          className="h-72 w-96 object-cover"
+        />
+
+        <h3 className="text-xl font-semibold pt-5  py-2 text-center">
+          {product.name}
+        </h3>
+
+        <div className="flex justify-between w-full items-center mt-2">
+          <div>
+            <p className="line-through text-red-500">
+              {Math.round(product.price * 1.1)}
+            </p>
+            <p className="">
+              Rs.{" "}
+              <span className="italic font-semibold text-xl ">
+                {product.price}
+              </span>
+            </p>
+          </div>
+          <button
+            className="bg-primary p-3 cursor-pointer transition-all duration-200 hover:bg-primary/80 text-white font-semibold rounded-full"
+            onClick={() =>
+              addToCartHandler({
+                productId: product._id,
+                photo: product.photo,
+                name: product.name,
+                price: product.price,
+                quantity: 1,
+                stock: product.stock,
+              })
+            }
+          >
+            <BsCart2 className="text-xl" />
+          </button>
         </div>
       </div>
     );
   };
 
-  return (
+  return isLoading ? (
+    <ProductSkeleton />
+  ) : (
     <div className="card">
       <Carousel
         value={products}
@@ -95,7 +108,7 @@ const ProductCarousel = () => {
         responsiveOptions={responsiveOptions}
         className="custom-carousel"
         circular
-        autoplayInterval={1000}
+        autoplayInterval={1500}
         itemTemplate={productTemplate}
       />
     </div>
