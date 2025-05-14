@@ -115,7 +115,7 @@ const Search = () => {
               {searchedData?.products?.map((product: any) => (
                 <div
                   key={product._id}
-                  className=" border-[rgba(0,0,0,0.1)] border-[1px] rounded-2xl p-3 flex flex-col   items-center"
+                  className=" border-[rgba(0,0,0,0.1)] border-[1px] shadow-xl  p-3 flex flex-col   items-center"
                 >
                   <main className="flex items-center justify-between w-full pb-5 pt-2">
                     <div className="flex items-center gap-2">
@@ -136,13 +136,23 @@ const Search = () => {
                   <img
                     src={`${server}/${product.photo}`}
                     alt={product.name}
-                    className="h-72 w-96 object-cover rounded-3xl"
+                    className="h-92 w-96 object-cover "
                   />
                   <h3 className="text-2xl font-semibold py-2">
                     {product.name}
                   </h3>
                   <div className="flex justify-between w-full items-center">
-                    <p className="text-xl ">Rs. {product.price}</p>
+                    <div>
+                      <p className="line-through text-red-500">
+                        {Math.round(product.price * 1.1)}
+                      </p>
+                      <p className="">
+                        Rs.{" "}
+                        <span className="italic font-semibold text-xl ">
+                          {product.price}
+                        </span>
+                      </p>
+                    </div>
                     <button
                       className="bg-primary p-3 cursor-pointer transition-all duration-200 hover:bg-primary/80 text-white font-semibold rounded-full"
                       onClick={() =>
