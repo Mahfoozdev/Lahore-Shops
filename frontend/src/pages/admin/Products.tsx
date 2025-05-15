@@ -2,12 +2,14 @@ import { ReactElement, useEffect, useState } from "react";
 import TableHOC from "../../components/TableHOC";
 import { TableColumn } from "react-data-table-component";
 import { useAllProductsQuery } from "../../redux/api/productAPI";
-import { Link } from "react-router-dom";
+import { Link, Links } from "react-router-dom";
 import { server } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
 import { useSelector } from "react-redux";
 import { UserReducerInitialState } from "../../types/reducer-types";
 import Loader from "../../components/Loader";
+import { MdDriveFileMove } from "react-icons/md";
+import { Button } from "@mui/material";
 
 interface DataType {
   photo: ReactElement;
@@ -89,12 +91,20 @@ const Products = () => {
     );
 
   return (
-    <TableHOC<DataType>
-      columns={columns}
-      data={rows}
-      containerClassName="dashboard-product-box"
-      heading="Products"
-    />
+    <div className="flex flex-col py-10">
+      {" "}
+      <Button sx={{ width: "150px" }} variant="outlined">
+        <Link to="/admin/product/new-product" className="w-full">
+          Create Product
+        </Link>
+      </Button>
+      <TableHOC<DataType>
+        columns={columns}
+        data={rows}
+        containerClassName="dashboard-product-box"
+        heading="Products"
+      />
+    </div>
   );
 };
 

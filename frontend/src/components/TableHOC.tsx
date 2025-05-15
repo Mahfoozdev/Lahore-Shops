@@ -24,7 +24,7 @@ function TableHOC<T extends object>({
   );
 
   return (
-    <div className={`${containerClassName} w-full flex justify-center py-32`}>
+    <div className={`${containerClassName} w-full flex justify-center pb-32`}>
       <div className="w-[95%] md:w-[90%]">
         <div className="w-full text-center">
           <h2 className="pb-10 text-3xl font-semibold font-dance">{heading}</h2>

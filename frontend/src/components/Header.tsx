@@ -8,6 +8,7 @@ import { FaPowerOff } from "react-icons/fa6";
 import { IoHomeOutline } from "react-icons/io5";
 import { CartReducerInitialState } from "../types/reducer-types";
 import { useSelector } from "react-redux";
+import { Avatar, Button, Chip } from "@mui/material";
 interface PropsTypes {
   user: User | null;
 }
@@ -32,7 +33,7 @@ const Header = ({ user }: PropsTypes) => {
         <div>LOGO</div>
 
         <div className="flex items-center gap-10">
-          <Link to="/">
+          <Link to="/" title="Home">
             <IoHomeOutline />
           </Link>
 
@@ -41,7 +42,7 @@ const Header = ({ user }: PropsTypes) => {
             Shop
           </Link>
           <p className="font-light">|</p>
-          <Link to="/cart" className="font-bold text-xl  relative">
+          <Link to="/cart" title="Cart" className="font-bold text-xl  relative">
             <BsCart2 />
             <p className="bg-primary rounded-full text-sm px-[6px] text-white absolute -top-3 left-3 w-fit h-fit">
               {totalItems}
@@ -50,20 +51,29 @@ const Header = ({ user }: PropsTypes) => {
 
           <p className="font-light">|</p>
           {user && (
-            <Link to="/orders" className="font-normal text-[16px]">
+            <Link
+              to="/orders"
+              title="Check Your Orders"
+              className="font-normal text-[16px]"
+            >
               My Orders
             </Link>
           )}
 
           {user && (
-            <img
-              src={user.photo}
-              alt=""
-              className="rounded-full h-10 object-cover"
+            <Chip
+              avatar={<Avatar alt={user.name} src={user.photo} />}
+              title={user.name}
+              sx={{
+                background: "white",
+              }}
+              label={user.name.split(" ")[1]}
             />
           )}
+
           {user && (
             <button
+              title="Logout"
               className=" font-light flex items-center gap-2 text-[18px] cursor-pointer"
               onClick={logoutHandler}
             >

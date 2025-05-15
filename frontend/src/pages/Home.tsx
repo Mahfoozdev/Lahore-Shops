@@ -120,7 +120,10 @@ const Home = () => {
         <div className="w-full text-start">
           {" "}
           <h1 className="font-bold text-2xl">
-            Products {searchedData?.products.map((i) => i.category).slice(0, 1)}
+            May Be You Want To Buy{" "}
+            <span className="uppercase text-primary">
+              {searchedData?.products.map((i) => i.category).slice(0, 1)}
+            </span>
           </h1>
         </div>
         <div className="w-[99%]">

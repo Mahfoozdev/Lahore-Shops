@@ -9,12 +9,14 @@ import { server } from "../redux/store";
 import { useDispatch } from "react-redux";
 import { CartItems } from "../types/types";
 import { addToCart } from "../redux/reducer/cartReducer";
-import { CiSearch, CiShoppingTag } from "react-icons/ci";
+import { CiShoppingTag } from "react-icons/ci";
 import { AiOutlineMenuFold } from "react-icons/ai";
 import { BsCart2 } from "react-icons/bs";
 import { toast } from "react-toastify";
 import "../styles/search.css";
 import { FaCircleArrowRight } from "react-icons/fa6";
+import PaginationControlled from "../components/Pagination";
+import SearchProducts from "../components/SearchProducts";
 const Search = () => {
   const { data: categoryData } = useCategoriesQuery("");
 
@@ -36,7 +38,7 @@ const Search = () => {
     price: maxPrice,
     page,
   });
-
+  const allProducts = searchedData?.products;
   const dispatch = useDispatch();
   const addToCartHandler = (cartItem: CartItems) => {
     if (cartItem.stock < 1) return toast.error("Out Of Stock");
@@ -45,12 +47,9 @@ const Search = () => {
     toast.success("Item Added to Cart");
   };
 
-  const isPrevPage = page > 1;
-  const isNextPage = page < searchedData?.totalPage!; // You might want to use `searchedData.totalPages` dynamically
-
   return (
     <div className="w-full flex justify-center mt-10">
-      <main className="w-[90%] flex ">
+      <main className="md:w-[95%] w-[96%] flex gap-5">
         <div className="w-[250px]">
           <div className="bg-primary flex justify-between items-center p-5 text-white w-[250px]">
             <h2 className=""> Browse Categories</h2>
@@ -79,26 +78,33 @@ const Search = () => {
           ))}
         </div>
 
-        <div className="p-4 max-w-4xl  mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="w-full relative">
-              <input
-                type="text"
-                placeholder="Search for Products here ..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="border-[1px] w-full border-[rgba(0,0,0,0.3)] input-field outline-0 px-3 py-2 "
+        <div className="">
+          <div className="flex flex-col ">
+            <p className="font-semibold bg-primary text-white p-5 mb-5">
+              Max Price: Rs.{maxPrice}
+            </p>
+            <input
+              type="range"
+              min={0}
+              max={10000}
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(Number(e.target.value))}
+              className="w-full cursor-pointer accent-primary"
+            />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-7">
+            <div>
+              <SearchProducts
+                allProducts={allProducts!}
+                search={search}
+                mySearch={setSearch}
               />
-              <div className="absolute top-4 right-3">
-                {" "}
-                <CiSearch />
-              </div>
             </div>
 
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
-              className="border-[1px] border-[rgba(0,0,0,0.3)] px-3 py-2 input-field outline-0 text-[rgba(0,0,0,0.7)]"
+              className="border-[1px] border-[rgba(0,0,0,0.3)] rounded px-3 py-2 input-field outline-0 text-[rgba(0,0,0,0.7)]"
             >
               <option value="">Sort By</option>
               <option value="asc">Price: Low → High</option>
@@ -111,7 +117,7 @@ const Search = () => {
           ) : productIsError ? (
             <p>Error: {(productError as CustomError)?.data.message}</p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-24">
+            <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-5 mb-24">
               {searchedData?.products?.map((product: any) => (
                 <div
                   key={product._id}
@@ -174,45 +180,13 @@ const Search = () => {
             </div>
           )}
 
-          <div className="flex justify-end items-center gap-10 mt-6">
-            <button
-              disabled={!isPrevPage}
-              onClick={() => setPage((prev) => prev - 1)}
-              className="px-4 py-2 bg-primary text-white cursor-pointer rounded rounded-l-full disabled:opacity-50"
-            >
-              Prev
-            </button>
-            <div className="flex items-center gap-3">
-              <span className="bg-primary text-white rounded-full w-[32px] h-[32px] flex justify-center items-center">
-                {page}
-              </span>
-              <p className="text-[rgba(0,0,0,0.5)]">/</p>
-              <span className="text-[rgba(0,0,0,0.5)]">
-                {searchedData?.totalPage}
-              </span>
-            </div>
-            <button
-              disabled={!isNextPage}
-              onClick={() => setPage((prev) => prev + 1)}
-              className="px-4 py-2 bg-primary rounded text-white cursor-pointer rounded-r-full disabled:opacity-50"
-            >
-              Next
-            </button>
+          <div className="w-full flex justify-end">
+            <PaginationControlled
+              totalPage={searchedData?.totalPage!}
+              page={page}
+              setPage={setPage}
+            />
           </div>
-        </div>
-
-        <div className="flex flex-col ">
-          <p className="font-semibold bg-primary text-white p-5 mb-5">
-            Max Price: Rs.{maxPrice}
-          </p>
-          <input
-            type="range"
-            min={0}
-            max={10000}
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(Number(e.target.value))}
-            className="w-full cursor-pointer accent-primary"
-          />
         </div>
       </main>
     </div>

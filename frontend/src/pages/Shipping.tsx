@@ -9,13 +9,7 @@ import {
 import { ShippingInfo } from "../types/types";
 import { NewOrderRequest } from "../types/api-types";
 import jazzCashLogo from "../assets/jazzcash.webp";
-import {
-  FaHome,
-  FaCity,
-  FaMapMarkedAlt,
-  FaGlobe,
-  FaPhoneAlt,
-} from "react-icons/fa";
+import { FaHome, FaCity, FaMapMarkedAlt, FaGlobe } from "react-icons/fa";
 import pakistan from "../assets/pakistan.png";
 import "../styles/search.css";
 import { MdDeliveryDining } from "react-icons/md";

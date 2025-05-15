@@ -12,7 +12,8 @@ import { store, persistor } from "./redux/store.ts";
 import "primereact/resources/themes/lara-light-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "react-toastify/dist/ReactToastify.css";
-
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import theme from "./materialuiTheme.ts";
 // Your global styles
 import "./index.css";
 import "./styles/app.scss";
@@ -32,7 +33,10 @@ root.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <PrimeReactProvider value={primeReactConfig}>
-          <App />
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <App />
+          </ThemeProvider>
         </PrimeReactProvider>
       </PersistGate>
     </Provider>

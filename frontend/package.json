@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.1.0",
+    "@mui/styled-engine-sc": "^7.1.0",
     "@reduxjs/toolkit": "^2.6.1",
     "@tailwindcss/vite": "^4.1.4",
     "axios": "^1.9.0",
@@ -28,6 +32,7 @@
     "react-transition-group": "^4.4.5",
     "redux-persist": "^6.0.0",
     "sass": "^1.86.3",
+    "styled-components": "^6.1.18",
     "tailwindcss": "^4.1.4"
   },
   "devDependencies": {

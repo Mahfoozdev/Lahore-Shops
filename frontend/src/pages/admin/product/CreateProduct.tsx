@@ -3,7 +3,22 @@ import { useSelector } from "react-redux";
 import { useNewProductMutation } from "../../../redux/api/productAPI";
 import { UserReducerInitialState } from "../../../types/reducer-types";
 import { responseToast } from "../../../utils/features";
+import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import { FaCloudDownloadAlt } from "react-icons/fa";
+
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
 
 const CreateProduct = () => {
   const { user } = useSelector(
@@ -109,13 +124,28 @@ const CreateProduct = () => {
               <label htmlFor="photo" className="font-primary">
                 Photo:
               </label>
-              <input
+              <Button
+                component="label"
+                role={undefined}
+                variant="contained"
+                tabIndex={-1}
+                startIcon={<FaCloudDownloadAlt />}
+              >
+                Upload files
+                <VisuallyHiddenInput
+                  type="file"
+                  id="photo"
+                  accept="image/*"
+                  onChange={changeImageHandler}
+                />
+              </Button>
+              {/* <input
                 id="photo"
                 className="border-2 border-black p-3"
                 type="file"
                 accept="image/*"
                 onChange={changeImageHandler}
-              />
+              /> */}
             </div>
 
             {photoPrev && (
