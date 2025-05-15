@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { JSX, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNewOrderMutation } from "../redux/api/orderApi";
 import {
@@ -9,7 +9,17 @@ import {
 import { ShippingInfo } from "../types/types";
 import { NewOrderRequest } from "../types/api-types";
 import jazzCashLogo from "../assets/jazzcash.webp";
+import {
+  FaHome,
+  FaCity,
+  FaMapMarkedAlt,
+  FaGlobe,
+  FaPhoneAlt,
+} from "react-icons/fa";
+import pakistan from "../assets/pakistan.png";
 import "../styles/search.css";
+import { MdDeliveryDining } from "react-icons/md";
+import { FaAngleDown } from "react-icons/fa6";
 
 const Shipping = () => {
   const navigate = useNavigate();
@@ -34,7 +44,8 @@ const Shipping = () => {
     "cashOnDelivery" | "online"
   >("cashOnDelivery");
 
-  const [newOrder, { isLoading }] = useNewOrderMutation();
+  const [newOrder] = useNewOrderMutation();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     if (cartItems.length === 0) {
@@ -148,57 +159,118 @@ const Shipping = () => {
       }
     }
   };
-  const fields: { label: string; name: keyof ShippingInfo }[] = [
-    { label: "Address", name: "address" },
-    { label: "City", name: "city" },
-    { label: "State", name: "state" },
-    { label: "Country", name: "country" },
-    { label: "Phone Number", name: "pinCode" }, // was incorrectly labeled "Phone Number"
+
+  const toggleDropdown = () => setDropdownOpen((prev) => !prev);
+  const fields: {
+    label: string;
+    name: keyof ShippingInfo;
+    icon: JSX.Element;
+  }[] = [
+    {
+      label: "Address",
+      name: "address",
+      icon: <FaHome className="text-primary" />,
+    },
+    { label: "City", name: "city", icon: <FaCity className="text-primary" /> },
+    {
+      label: "State",
+      name: "state",
+      icon: <FaMapMarkedAlt className="text-primary" />,
+    },
+    {
+      label: "Country",
+      name: "country",
+      icon: <FaGlobe className="text-primary" />,
+    },
+    {
+      label: "Phone Number",
+      name: "pinCode",
+      icon: <img src={pakistan} alt="" className="h-4 w-5 object-contain" />,
+    },
   ];
 
   return (
-    <div className=" w-full flex justify-center">
+    <div className=" w-full flex justify-center pt-10">
       <div className="flex flex-col shadow-xl p-10 w-[30%] justify-center items-center">
         <h2 className="text-xl text-primary font-bold">Shipping Information</h2>
         <form className="pt-5 flex flex-col gap-5 w-full">
-          {fields.map(({ label, name }) => (
+          {fields.map(({ label, name, icon }) => (
             <div key={name} className="flex flex-col w-full">
-              <label className="font-semibold">{label}</label>
-              <input
-                type={name === "pinCode" ? "number" : "text"}
-                name={name}
-                value={shippingInfo[name]}
-                onChange={handleInputChange}
-                className="outline-0 w-full rounded border border-[rgba(0,0,0,0.5)] input-field px-3 py-2"
-                required
-              />
+              <label className="font-semibold mb-1">{label}</label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                  {icon}
+                </span>
+                <input
+                  type={name === "pinCode" ? "number" : "text"}
+                  name={name}
+                  value={shippingInfo[name]}
+                  onChange={handleInputChange}
+                  className="outline-0 w-full pl-10  border border-[rgba(0,0,0,0.1)] input-field px-3 py-2"
+                  required
+                />
+              </div>
             </div>
           ))}
-          <div className="flex flex-col gap-5 pb-5">
+
+          <div className="flex flex-col gap-3 pb-5">
             <label className="font-semibold text-xl">Payment Method</label>
-            <select
-              value={paymentMethod}
-              onChange={(e) =>
-                setPaymentMethod(e.target.value as "cashOnDelivery" | "online")
-              }
-              className="bg-primary/90 text-white p-5 font-semibold tracking-wider"
-            >
-              <option value="cashOnDelivery">Cash on Delivery</option>
-              <option value="online">
-                JazzCash Payment{" "}
-                <img
-                  src={jazzCashLogo}
-                  alt=""
-                  className="h-32 w-32 object-contain"
-                />{" "}
-              </option>
-            </select>
+            <div className="relative">
+              <div
+                className="bg-[whitesmoke] border border-[rgba(0,0,0,0.2)] px-5 py-3 cursor-pointer font-semibold"
+                onClick={toggleDropdown}
+              >
+                {paymentMethod === "online" ? (
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={jazzCashLogo}
+                      alt="JazzCash"
+                      className="h-6 w-6 object-contain"
+                    />
+                    Pay With JazzCash
+                    <FaAngleDown className="text-primary" />
+                  </div>
+                ) : (
+                  <div className="px-4  hover:bg-gray-100 flex items-center gap-2 cursor-pointer">
+                    <MdDeliveryDining /> Cash on Delivery{" "}
+                    <FaAngleDown className="text-primary" />
+                  </div>
+                )}
+              </div>
+              {dropdownOpen && (
+                <div className="absolute z-10 bg-white border border-[rgba(0,0,0,0.2)] mt-1 w-full">
+                  <div
+                    onClick={() => {
+                      setPaymentMethod("cashOnDelivery");
+                      setDropdownOpen(false);
+                    }}
+                    className="px-4 py-2 hover:bg-gray-100 flex items-center gap-2 cursor-pointer"
+                  >
+                    <MdDeliveryDining /> Cash on Delivery
+                  </div>
+                  <div
+                    onClick={() => {
+                      setPaymentMethod("online");
+                      setDropdownOpen(false);
+                    }}
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2"
+                  >
+                    <img
+                      src={jazzCashLogo}
+                      alt="JazzCash"
+                      className="h-5 w-5 object-contain"
+                    />
+                    Pay With JazzCash
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           <button
             type="button"
             onClick={handleOrder}
-            className="bg-primary text-white font-semibold text-xl p-5 rounded-xl hover:bg-primary/80"
+            className="bg-primary text-white font-semibold text-xl p-5 cursor-pointer hover:bg-primary/80"
           >
             {paymentMethod === "online" ? "Pay & Place Order" : "Place Order"}
           </button>

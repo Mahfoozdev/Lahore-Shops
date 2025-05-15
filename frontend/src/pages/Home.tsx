@@ -3,14 +3,43 @@ import "../styles/hom.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductCarousel from "../components/ProductCarosel";
-import { Skeleton } from "primereact/skeleton";
-import ProductSkeleton from "../components/ProductSkeleton";
+import {
+  useCategoriesQuery,
+  useLatestProductsQuery,
+  useSearchProductsQuery,
+} from "../redux/api/productAPI";
 
 const words = ["Journey", "Adventure", "Voyage"];
 
 const Home = () => {
   const [index, setIndex] = useState(0);
 
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("");
+  const [maxPrice, setMaxPrice] = useState(0);
+  const [category, setCategory] = useState<string>("");
+  const [page, setPage] = useState(1);
+
+  const { data, isLoading, isError } = useLatestProductsQuery("");
+
+  const { data: categoryData } = useCategoriesQuery("");
+  const {
+    data: searchedData,
+    isLoading: productLoading,
+    isError: productIsError,
+  } = useSearchProductsQuery({
+    search,
+    sort,
+    category,
+    price: maxPrice,
+    page,
+  });
+  useEffect(() => {
+    if (searchedData?.products?.length! > 0) {
+      const firstCategory = categoryData?.categories[0];
+      setCategory(firstCategory || "");
+    }
+  }, [searchedData]);
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
@@ -78,7 +107,28 @@ const Home = () => {
           <h1 className="font-bold text-2xl">Our Latest Products</h1>
         </div>
         <div className="w-[99%]">
-          <ProductCarousel />
+          <ProductCarousel
+            products={data?.products || []}
+            isLoading={isLoading}
+            isError={isError}
+          />
+        </div>
+      </section>
+
+      {/* Category[01] Products */}
+      <section className="w-[90%] pt-28 flex justify-center flex-col items-center gap-5">
+        <div className="w-full text-start">
+          {" "}
+          <h1 className="font-bold text-2xl">
+            Products {searchedData?.products.map((i) => i.category).slice(0, 1)}
+          </h1>
+        </div>
+        <div className="w-[99%]">
+          <ProductCarousel
+            products={searchedData?.products || []}
+            isLoading={productLoading}
+            isError={productIsError}
+          />
         </div>
       </section>
     </div>

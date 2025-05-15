@@ -35,7 +35,9 @@ const Header = ({ user }: PropsTypes) => {
           <Link to="/">
             <IoHomeOutline />
           </Link>
-          <Link to="/search" className="font-normal">
+
+          <p className="font-light">|</p>
+          <Link to="/search" className="font-normal text-[16px]">
             Shop
           </Link>
           <p className="font-light">|</p>
@@ -45,6 +47,14 @@ const Header = ({ user }: PropsTypes) => {
               {totalItems}
             </p>
           </Link>
+
+          <p className="font-light">|</p>
+          {user && (
+            <Link to="/orders" className="font-normal text-[16px]">
+              My Orders
+            </Link>
+          )}
+
           {user && (
             <img
               src={user.photo}

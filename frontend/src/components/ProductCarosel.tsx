@@ -1,29 +1,31 @@
 import { Carousel } from "primereact/carousel";
-import { useLatestProductsQuery } from "../redux/api/productAPI";
 import { BsCart2 } from "react-icons/bs";
 import { CiShoppingTag } from "react-icons/ci";
 import { server } from "../redux/store";
 import { useDispatch } from "react-redux";
-import { CartItems } from "../types/types";
+import { CartItems, Product } from "../types/types";
 import { addToCart } from "../redux/reducer/cartReducer";
 import { toast } from "react-toastify";
 import "../styles/productCarosel.css";
 import ProductSkeleton from "./ProductSkeleton";
 
-const ProductCarousel = () => {
-  const { data, isLoading, isError } = useLatestProductsQuery("");
+interface props {
+  products: Product[];
+  isLoading: boolean;
+  isError: boolean;
+}
+
+const ProductCarousel = ({ products, isLoading, isError }: props) => {
   if (isError) {
     toast.error("Cannot fetch Products");
   }
 
-  const products = data?.products || [];
-
   const responsiveOptions = [
-    { breakpoint: "1400px", numVisible: 4, numScroll: 1 },
+    { breakpoint: "1399px", numVisible: 4, numScroll: 1 },
     { breakpoint: "1199px", numVisible: 3, numScroll: 1 },
-    { breakpoint: "1000px", numVisible: 2, numScroll: 1 },
-    { breakpoint: "767px", numVisible: 2, numScroll: 1 },
-    { breakpoint: "575px", numVisible: 1, numScroll: 1 },
+    { breakpoint: "1001px", numVisible: 2, numScroll: 1 },
+    { breakpoint: "999px", numVisible: 2, numScroll: 1 },
+    { breakpoint: "767px", numVisible: 1, numScroll: 1 },
   ];
   const dispatch = useDispatch();
   const addToCartHandler = (cartItem: CartItems) => {
@@ -103,7 +105,7 @@ const ProductCarousel = () => {
     <div className="card">
       <Carousel
         value={products}
-        numVisible={3}
+        numVisible={4}
         numScroll={3}
         responsiveOptions={responsiveOptions}
         className="custom-carousel"
