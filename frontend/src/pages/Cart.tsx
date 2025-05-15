@@ -12,6 +12,7 @@ import { CartItems } from "../types/types";
 import { AiOutlineSend } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { IoMdCheckmark } from "react-icons/io";
 import {
   Table,
   TableBody,
@@ -21,8 +22,8 @@ import {
   TableRow,
   Paper,
   Button,
-  IconButton,
   Chip,
+  Alert,
 } from "@mui/material";
 import { MdDeleteForever } from "react-icons/md";
 import { server } from "../redux/store";
@@ -105,7 +106,11 @@ const Cart = () => {
                           -
                         </Button>
                         <span>{item.quantity}</span>
-                        <Button variant="contained" size="small">
+                        <Button
+                          variant="contained"
+                          size="small"
+                          onClick={() => increaseHandler(item)}
+                        >
                           +
                         </Button>
                       </div>
@@ -116,7 +121,7 @@ const Cart = () => {
                         label="Remove"
                         color="primary"
                         deleteIcon={<MdDeleteForever />}
-                        onDelete={() => increaseHandler(item)}
+                        onDelete={() => removingHandle(item.productId)}
                       />
                     </TableCell>
                   </TableRow>
@@ -125,25 +130,34 @@ const Cart = () => {
             </Table>
           </TableContainer>
 
+          <div className="pt-10">
+            {shippingCharges > 0 ? (
+              ""
+            ) : (
+              <Alert
+                icon={<IoMdCheckmark fontSize="inherit" />}
+                severity="success"
+              >
+                You are eligible for free shipping
+              </Alert>
+            )}
+          </div>
+
           {/* Summary Section */}
-          <div className="mt-10 w-full max-w-[500px] bg-[whitesmoke] p-5 rounded shadow">
-            <div className="flex justify-between p-2 border-b font-medium">
+          <div className="mt-5 w-full max-w-[500px] bg-[whitesmoke] p-5 rounded shadow">
+            <div className="flex justify-between p-2 border-b border-b-[rgba(0,0,0,0.1)] font-medium">
               <span>Subtotal</span>
               <span>Rs. {subtotal}</span>
             </div>
-            <div className="flex justify-between p-2 border-b">
+            <div className="flex justify-between p-2 border-b border-b-[rgba(0,0,0,0.1)]">
               <span>Shipping Charges</span>
               <span>Rs. {shippingCharges}</span>
             </div>
-            <div className="flex justify-between p-2 border-b font-medium">
+            <div className="flex justify-between p-2 border-b border-b-[rgba(0,0,0,0.1)] font-medium">
               <span>Tax</span>
               <span>Rs. {tax}</span>
             </div>
-            <div className="flex justify-between p-2 border-b">
-              <span>Discount</span>
-              <span>Rs. {discount}</span>
-            </div>
-            <div className="flex justify-between p-2 border-t border-b font-bold text-lg">
+            <div className="flex justify-between p-2  border-b border-b-[rgba(0,0,0,0.1)] font-bold text-lg">
               <span>Total</span>
               <span>Rs. {total}</span>
             </div>
@@ -151,7 +165,7 @@ const Cart = () => {
               fullWidth
               variant="contained"
               color="primary"
-              className="mt-4"
+              sx={{ marginTop: "20px" }}
               onClick={placeOrderHandler}
               endIcon={<AiOutlineSend />}
             >

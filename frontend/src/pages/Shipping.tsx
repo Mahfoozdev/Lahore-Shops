@@ -185,7 +185,7 @@ const Shipping = () => {
 
   return (
     <div className=" w-full flex justify-center pt-10">
-      <div className="flex flex-col shadow-xl p-10 w-[30%] justify-center items-center">
+      <div className="flex flex-col shadow-xl p-10 w-[90%] md:w-[50%] justify-center items-center">
         <h2 className="text-xl text-primary font-bold">Shipping Information</h2>
         <form className="pt-5 flex flex-col gap-5 w-full">
           {fields.map(({ label, name, icon }) => (
