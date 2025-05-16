@@ -13,8 +13,8 @@
 .custom-carousel .p-carousel-next {
   top: 50% !important;
   transform: translateY(-50%);
-  background-color: #6c48b6;
-  color: white;
+  background-color: #928dab;
+  color: #1f1c2c;
   border-radius: 9999px;
   padding: 0.5rem;
   z-index: 10;

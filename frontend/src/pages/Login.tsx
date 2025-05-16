@@ -44,13 +44,13 @@ const SignUp = () => {
   return (
     <div className="w-full  flex flex-col items-center pb-32 pt-10">
       {register && (
-        <div className="pt-10 flex flex-col  gap-10 shadow-xl lg:w-[30%] w-full p-5">
-          <div className="w-full border-b-[1px] border-[rgba(0,0,0,0.1)] p-3">
-            <p className="text-xl font-semibold text-primary">REGISTER</p>
+        <div className="pt-10 flex flex-col  gap-10 bg-primary text-secondary lg:w-[30%] w-full p-5">
+          <div className="w-full border-b-[1px]  border-[rgba(0,0,0,0.1)] p-3">
+            <p className="text-xl font-semibold text-secondary">REGISTER</p>
             <p className="font-light">|</p>
             <button
               onClick={toggleHandler}
-              className="cursor-pointer text-primary/80"
+              className="cursor-pointer text-secondary/80"
             >
               SIGN IN
             </button>
@@ -61,7 +61,7 @@ const SignUp = () => {
                 Gender :
               </label>
               <select
-                className="border border-[rgba(0,0,0,0.4)] cursor-pointer p-3 w-full"
+                className="border border-secondary/20 cursor-pointer p-3 w-full"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
                 id=""
@@ -76,7 +76,7 @@ const SignUp = () => {
                 Date Of Birth :
               </label>
               <input
-                className="border w-full border-[rgba(0,0,0,0.4)] p-3 cursor-pointer"
+                className="border w-full border-secondary/20 p-3 cursor-pointer"
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
@@ -88,7 +88,7 @@ const SignUp = () => {
 
           <button
             onClick={loginHandler}
-            className="bg-primary hover:bg-white hover:text-black transition-all duration-300 border border-primary text-white  px-5 py-3 cursor-pointer flex items-center justify-center gap-3 rounded"
+            className="bg-secondary hover:bg-primary hover:text-secondary transition-all duration-300 border border-secondary text-primary  px-5 py-3 cursor-pointer flex items-center justify-center gap-3 rounded"
           >
             <span>
               <BsGoogle />
@@ -96,7 +96,7 @@ const SignUp = () => {
             Register with Google
           </button>
           <button
-            className="underline underline-offset-1 cursor-pointer text-sm text-primary"
+            className="underline underline-offset-1 cursor-pointer text-sm text-secondary"
             onClick={toggleHandler}
           >
             {" "}
@@ -106,13 +106,13 @@ const SignUp = () => {
       )}
 
       {!register && (
-        <div className="pt-10 flex flex-col  gap-2 shadow-xl lg:w-[30%] w-full p-5">
-          <div className="w-full border-b-[1px] border-[rgba(0,0,0,0.1)] p-3">
-            <p className="text-xl font-semibold text-primary">SIGN IN</p>
-            <p className="font-light">|</p>
+        <div className="pt-10 flex flex-col  gap-2 bg-primary shadow-xl lg:w-[30%] w-full p-5">
+          <div className="w-full border-b-[1px] border-secondary/20 p-3">
+            <p className="text-xl font-semibold text-secondary">SIGN IN</p>
+            <p className="font-light text-secondary">|</p>
             <button
               onClick={toggleHandler}
-              className="cursor-pointer text-primary/80"
+              className="cursor-pointer text-secondary/80"
             >
               REGISTER
             </button>
@@ -120,7 +120,7 @@ const SignUp = () => {
 
           <button
             onClick={loginHandler}
-            className="bg-primary hover:bg-white hover:text-black transition-all duration-300 border border-primary text-white  px-5 py-3 mt-5 mb-3 cursor-pointer flex items-center justify-center gap-3 rounded"
+            className="bg-secondary hover:bg-primary mt-5 hover:text-secondary transition-all duration-300 border border-secondary text-primary  px-5 py-3 cursor-pointer flex items-center justify-center gap-3 rounded"
           >
             <span>
               <BsGoogle />
@@ -128,7 +128,7 @@ const SignUp = () => {
             Log-In with Google
           </button>
           <button
-            className="underline underline-offset-1 cursor-pointer text-sm text-primary"
+            className="underline underline-offset-1 cursor-pointer text-sm text-secondary"
             onClick={toggleHandler}
           >
             {" "}

@@ -24,8 +24,29 @@ export default function SearchProducts({
         onInputChange={(_, newInputValue) => {
           mySearch(newInputValue);
         }}
+        sx={{
+          "& .MuiInputBase-input": {
+            color: "#928dab",
+          },
+          "& .MuiInputBase-placeholder": {
+            color: "#928dab",
+          },
+        }}
         renderInput={(params) => (
-          <TextField {...params} label="Search Product" />
+          <TextField
+            {...params}
+            label="Search Product"
+            sx={{
+              // Change the label color
+              "& .MuiInputLabel-root": {
+                color: "#928dab",
+              },
+              // Change label color on focus
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: "#7a6ba8",
+              },
+            }}
+          />
         )}
       />
     </Stack>

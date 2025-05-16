@@ -9,6 +9,39 @@ interface TableHOCProps<T> {
   heading: string;
 }
 
+const customStyles = {
+  table: {
+    style: {
+      backgroundColor: "#f4f4f8", // 👈 change this to any background color
+    },
+  },
+  headRow: {
+    style: {
+      backgroundColor: "#928dab",
+      color: "#333",
+    },
+  },
+  pagination: {
+    style: {
+      backgroundColor: "#d8d6e3", // 👈 pagination background color
+      borderTop: "1px solid #ccc", // optional border
+      padding: "10px",
+    },
+  },
+  rows: {
+    style: {
+      backgroundColor: "#d8d6e3",
+      color: "#000",
+    },
+  },
+  headCells: {
+    style: {
+      backgroundColor: "#d8d6e3",
+      color: "#444",
+      fontWeight: "bold",
+    },
+  },
+};
 function TableHOC<T extends object>({
   columns,
   data,
@@ -27,7 +60,7 @@ function TableHOC<T extends object>({
     <div className={`${containerClassName} w-full flex justify-center pb-32`}>
       <div className="w-[95%] md:w-[90%]">
         <div className="w-full text-center">
-          <h2 className="pb-10 text-3xl font-semibold font-dance">{heading}</h2>
+          <h2 className="pb-10 text-3xl font-semibold pt-10">{heading}</h2>
         </div>
         <div style={{ maxWidth: 1000, margin: "0 auto 1rem" }}>
           <input
@@ -52,6 +85,7 @@ function TableHOC<T extends object>({
             pagination
             highlightOnHover
             pointerOnHover
+            customStyles={customStyles}
           />
         </div>
       </div>

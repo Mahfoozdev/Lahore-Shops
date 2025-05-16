@@ -28,6 +28,7 @@ const Shipping = lazy(() => import("./pages/Shipping"));
 const Dashboard = lazy(() => import("./pages/admin/Dashboard"));
 const CreateProduct = lazy(() => import("./pages/admin/product/CreateProduct"));
 const Products = lazy(() => import("./pages/admin/Products"));
+const ProductDetails = lazy(() => import("./pages/ProductDetails"));
 const UpdateProduct = lazy(() => import("./pages/admin/product/UpdateProduct"));
 const Transaction = lazy(() => import("./pages/admin/Transaction"));
 const OrderManagement = lazy(() => import("./pages/admin/OrderManagement"));
@@ -66,6 +67,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/terms-and-conditions" element={<Terms />} />
           <Route path="/pay" element={<Payment />} />
           <Route path="*" element={<NotFound />} />

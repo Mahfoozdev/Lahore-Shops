@@ -28,11 +28,13 @@ const Header = ({ user }: PropsTypes) => {
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="w-full flex justify-center bg-primary text-white">
-      <main className="w-[90%] flex gap-32 font-bold  justify-between items-center py-5 text-xl font-secondary">
-        <div>LOGO</div>
+    <div className="w-full flex justify-center bg-primary text-secondary">
+      <main className="w-[90%] flex gap-32 font-bold  justify-between items-center py-5 text-xl">
+        <Link to="/" className="flex gap-3">
+          <h1>LS</h1> <h2 className="underline">lahoreShops</h2>
+        </Link>
 
-        <div className="flex items-center gap-10">
+        <div className="lg:flex hidden  items-center gap-10">
           <Link to="/" title="Home">
             <IoHomeOutline />
           </Link>
@@ -42,9 +44,13 @@ const Header = ({ user }: PropsTypes) => {
             Shop
           </Link>
           <p className="font-light">|</p>
-          <Link to="/cart" title="Cart" className="font-bold text-xl  relative">
+          <Link
+            to="/cart"
+            title="Cart"
+            className="font-bold text-xl font-secondary relative"
+          >
             <BsCart2 />
-            <p className="bg-primary rounded-full text-sm px-[6px] text-white absolute -top-3 left-3 w-fit h-fit">
+            <p className="bg-primary rounded-full text-sm px-[6px]  absolute -top-3 left-3 w-fit h-fit">
               {totalItems}
             </p>
           </Link>
@@ -65,7 +71,8 @@ const Header = ({ user }: PropsTypes) => {
               avatar={<Avatar alt={user.name} src={user.photo} />}
               title={user.name}
               sx={{
-                background: "white",
+                background: "#1f1c2c",
+                color: "#928dab",
               }}
               label={user.name.split(" ")[1]}
             />
@@ -86,7 +93,7 @@ const Header = ({ user }: PropsTypes) => {
             {!user && (
               <Link
                 to="/login"
-                className="bg-primary rounded px-3 py-2 font-normal cursor-pointer text-white"
+                className="bg-primary rounded px-3 py-2 font-normal cursor-pointer text-secondary"
               >
                 Login
               </Link>

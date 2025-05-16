@@ -23,7 +23,17 @@ export default function PaginationControlled({
         page={page}
         color="primary"
         onChange={handleChange}
-        size="large" // makes the whole pagination component larger
+        size="large"
+        sx={{
+          "& .MuiPaginationItem-root": {
+            color: "#928dab", // applies to text and arrows
+          },
+          // Optional: add different color on selected page
+          "& .Mui-selected": {
+            backgroundColor: "#928dab",
+            color: "#1f1c2c",
+          },
+        }}
       />
     </Stack>
   );

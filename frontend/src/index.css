@@ -1,13 +1,14 @@
 @import "tailwindcss";
 @theme {
-  --font-primary: "Titillium Web";
+  /* --font-primary: "Titillium Web"; */
   --font-secondary: "Raleway";
   --font-dance: "Dancing Script";
   --font-comfort: "Comfortaa";
   --font-mina: "Mina";
-  --font-danger: "Nova Slim";
-  --color-primary: #6c48b6;
-  --color-secondary: #f3b1f9;
+  --font-primary: "Nova Slim";
+  /* --color-primary: #6c48b6; */
+  --color-primary: #928dab;
+  --color-secondary: #1f1c2c;
   --color-hover: #2c1457;
   --color-danger: #a071ca;
 }

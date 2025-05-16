@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
   useDeleteOrderMutation,
@@ -8,41 +9,53 @@ import { UserReducerInitialState } from "../../types/reducer-types";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { server } from "../../redux/store";
+import { getUser } from "../../redux/api/userAPI";
 
 const OrderManagement = () => {
-  const { user } = useSelector(
-    (state: { userReducer: UserReducerInitialState }) => state.userReducer
-  );
+  const [customerEmail, setCustomerEmail] = useState<string>("");
 
-  const [updateOrder] = useUpdateOrderMutation();
-  const [deleteOrder] = useDeleteOrderMutation();
   const params = useParams();
   const navigate = useNavigate();
 
+  const { user } = useSelector(
+    (state: { userReducer: UserReducerInitialState }) => state.userReducer
+  );
   const { data, isLoading, isError } = useOrderDetailsQuery(params.id!);
 
+  const [deleteOrder] = useDeleteOrderMutation();
+  const [updateOrder] = useUpdateOrderMutation();
   if (isLoading) return <Loader />;
   if (isError || !data?.order) return <Navigate to="/404" />;
-
-  // ✅ Now safe to destructure
   const {
     shippingInfo: { address, city, state, country, pinCode },
     orderItems,
-    user: { name },
+    user: { name, _id },
     status,
     shippingCharges,
     tax,
     total,
     subtotal,
     discount,
-  } = data.order;
+  } = data?.order!;
+  const fetchUserEmail = async () => {
+    try {
+      const userData = await getUser(_id); // id from data.order.user.id
+      if (userData.success) {
+        setCustomerEmail(userData.user.email);
+      }
+    } catch (error) {
+      console.error("Failed to fetch user email:", error);
+    }
+  };
 
+  if (_id) fetchUserEmail();
   const updateHandler = async () => {
     await updateOrder({
       userId: user?._id!,
       orderId: data.order._id,
     });
     navigate("/admin/orders");
+    window.location.reload();
   };
 
   const deleteHandler = async () => {
@@ -51,6 +64,7 @@ const OrderManagement = () => {
       orderId: data.order._id,
     });
     navigate("/admin/orders");
+    window.location.reload();
   };
 
   return (
@@ -59,6 +73,9 @@ const OrderManagement = () => {
 
       <div className="mb-4">
         <h2 className="text-lg font-semibold">Customer: {name}</h2>
+        <h2 className="text-lg font-semibold">
+          Customer-Email: {customerEmail}
+        </h2>
         <p>
           Status: <span className="font-medium">{status}</span>
         </p>
@@ -82,13 +99,17 @@ const OrderManagement = () => {
 
       <div className="mb-4">
         <h2 className="text-lg font-semibold">Items</h2>
-        <ul className="list-disc ml-6">
+        <ul className="list-disc ml-6 grid grid-cols-1 lg:grid-cols-4">
           {orderItems.map((item, index) => (
             <li key={index}>
               {item.name} - Quantity: {item.quantity}
               <br />
               <strong>Photo</strong>
-              <img src={`${server}/${item.photo}`} alt="" />
+              <img
+                src={`${server}/${item.photo}`}
+                alt=""
+                className="h-72 w-72"
+              />
             </li>
           ))}
         </ul>
