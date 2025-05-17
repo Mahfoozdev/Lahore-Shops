@@ -44,7 +44,7 @@ const SignUp = () => {
   return (
     <div className="w-full  flex flex-col items-center pb-32 pt-10">
       {register && (
-        <div className="pt-10 flex flex-col  gap-10 bg-primary text-secondary lg:w-[30%] w-full p-5">
+        <div className="pt-10 flex flex-col  gap-10 bg-primary text-secondary lg:w-[30%] w-[90%] p-5">
           <div className="w-full border-b-[1px]  border-[rgba(0,0,0,0.1)] p-3">
             <p className="text-xl font-semibold text-secondary">REGISTER</p>
             <p className="font-light">|</p>
@@ -106,7 +106,7 @@ const SignUp = () => {
       )}
 
       {!register && (
-        <div className="pt-10 flex flex-col  gap-2 bg-primary shadow-xl lg:w-[30%] w-full p-5">
+        <div className="pt-10 flex flex-col  gap-2 bg-primary shadow-xl lg:w-[30%] w-[90%] p-5">
           <div className="w-full border-b-[1px] border-secondary/20 p-3">
             <p className="text-xl font-semibold text-secondary">SIGN IN</p>
             <p className="font-light text-secondary">|</p>

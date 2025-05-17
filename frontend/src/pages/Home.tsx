@@ -133,54 +133,56 @@ const Home = () => {
         <Slider />
       </div>
       {/*  */}
-      <main className="pt-20">
-        <section className="flex flex-col lg:flex-row px-5 py-20 gap-10 md:p-10  bg-primary text-secondary w-full rounded-t-4xl lg:p-10 xl:p-0 xl:py-2 border-border border-[1px] justify-between xl:relative mb-5">
-          <div className="flex flex-col gap-1 md:gap-5 md:pl-10 pl-5 lg:w-full justify-center text-center lg:text-start">
-            <h2 className="xl:text-5xl font-bold md:text-[45px] text-[37px] ">
-              Check latest news
-            </h2>
-            <p className="font-semibold pt-5 md:pt-0 leading-7">
-              Stay informed with the newest updates and news.
-            </p>
-          </div>
-          <img
-            src={first}
-            alt=""
-            className="lg:w-full md:w-[50%] w-[38%] object-contain hidden xl:block"
-          />
-          <div className="flex justify-center items-center">
-            <Link
-              to="/search"
-              className="bg-secondary text-primary border border-secondary hover:text-secondary font-bold flex justify-center items-center hover:bg-primary md:py-3 lg:w-[220px] h-fit md:w-[180px] md:px-0 px-2 py-4 rounded-full text-sm md:text-lg  xl:absolute xl:top-32 xl:right-14 w-[330px] "
-            >
-              Shop on our Store
-            </Link>
-          </div>
-        </section>
-        <section className=" flex flex-col lg:flex-row justify-center xl:p-0 xl:px-0 text-secondary  md:gap-10 md:p-10 py-20 items-center w-full rounded-b-4xl border bg-primary/60 border-primary/10 lg:p-10 lg:pr-10 lg:px-5  xl:relative">
-          <div className="flex flex-col gap-1 md:gap-5 md:pl-10 pl-5 justify-center items-center lg:items-start md:w-full lg:pl-16 xl:pl-10 lg:pb-0  pb-10">
-            <h2 className="xl:text-5xl md:text-[45px] text-[43px] text-center lg:text-start font-bold">
-              Have any questions?
-            </h2>
-            <p className="font-semibold text-center lg:text-start pt-5 md:pt-0 leading-7">
-              Feel free to reach out to us anytime. We are here to help you!
-            </p>
-          </div>
-          <img
-            src={second}
-            alt=""
-            className="lg:w-full w-[50%] hidden xl:block"
-          />
-          <div className="flex justify-between items-center">
-            <Link
-              to="/contact"
-              className="bg-secondary text-primary border border-secondary hover:text-secondary font-bold flex justify-center items-center hover:bg-primary md:py-3 lg:w-[220px] h-fit md:w-[180px] md:px-0 px-2 py-4 rounded-full text-sm md:text-lg  xl:absolute xl:top-32 xl:right-14 w-[330px] "
-            >
-              Contact us
-            </Link>
-          </div>
-        </section>
-      </main>
+      <div className="w-full flex justify-center">
+        <main className="pt-20 w-[95%] md:w-[90%] ">
+          <section className="flex flex-col lg:flex-row px-5 py-20 gap-10 md:p-10  bg-primary text-secondary w-full rounded-t-4xl lg:p-10 xl:p-0 xl:py-2 border-border border-[1px] justify-between xl:relative mb-5">
+            <div className="flex flex-col gap-1 md:gap-5 md:pl-10 pl-5 lg:w-full justify-center text-center lg:text-start">
+              <h2 className="xl:text-5xl font-bold md:text-[45px] text-[37px] ">
+                Check latest news
+              </h2>
+              <p className="font-semibold pt-5 md:pt-0 leading-7">
+                Stay informed with the newest updates and news.
+              </p>
+            </div>
+            <img
+              src={first}
+              alt=""
+              className="lg:w-full md:w-[50%] w-[38%] object-contain hidden xl:block"
+            />
+            <div className="flex justify-center items-center">
+              <Link
+                to="/search"
+                className="bg-secondary text-primary border border-secondary hover:text-secondary font-bold flex justify-center items-center hover:bg-primary md:py-3 lg:w-[220px] h-fit md:w-[180px] md:px-0 px-2 py-4 rounded-full text-sm md:text-lg  xl:absolute xl:top-32 xl:right-14 w-[330px] "
+              >
+                Shop on our Store
+              </Link>
+            </div>
+          </section>
+          <section className=" flex flex-col lg:flex-row justify-center xl:p-0 xl:px-0 text-secondary  md:gap-10 md:p-10 py-20 items-center w-full rounded-b-4xl border bg-primary/60 border-primary/10 lg:p-10 lg:pr-10 lg:px-5  xl:relative">
+            <div className="flex flex-col gap-1 md:gap-5 md:pl-10 pl-5 justify-center items-center lg:items-start md:w-full lg:pl-16 xl:pl-10 lg:pb-0  pb-10">
+              <h2 className="xl:text-5xl md:text-[45px] text-[43px] text-center lg:text-start font-bold">
+                Have any questions?
+              </h2>
+              <p className="font-semibold text-center lg:text-start pt-5 md:pt-0 leading-7">
+                Feel free to reach out to us anytime. We are here to help you!
+              </p>
+            </div>
+            <img
+              src={second}
+              alt=""
+              className="lg:w-full w-[50%] hidden xl:block"
+            />
+            <div className="flex justify-between items-center">
+              <Link
+                to="/contact"
+                className="bg-secondary text-primary border border-secondary hover:text-secondary font-bold flex justify-center items-center hover:bg-primary md:py-3 lg:w-[220px] h-fit md:w-[180px] md:px-0 px-2 py-4 rounded-full text-sm md:text-lg  xl:absolute xl:top-32 xl:right-14 w-[330px] "
+              >
+                Contact us
+              </Link>
+            </div>
+          </section>
+        </main>
+      </div>
 
       {/*  */}
 
