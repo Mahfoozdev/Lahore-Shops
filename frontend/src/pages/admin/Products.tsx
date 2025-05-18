@@ -2,13 +2,12 @@ import { ReactElement, useEffect, useState } from "react";
 import TableHOC from "../../components/TableHOC";
 import { TableColumn } from "react-data-table-component";
 import { useAllProductsQuery } from "../../redux/api/productAPI";
-import { Link, Links } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { server } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
 import { useSelector } from "react-redux";
 import { UserReducerInitialState } from "../../types/reducer-types";
 import Loader from "../../components/Loader";
-import { MdDriveFileMove } from "react-icons/md";
 import { Button } from "@mui/material";
 
 interface DataType {

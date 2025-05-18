@@ -1,11 +1,4 @@
-import {
-  CartItems,
-  Order,
-  OrderItems,
-  Product,
-  ShippingInfo,
-  User,
-} from "./types";
+import { Order, OrderItems, Product, ShippingInfo, User } from "./types";
 
 export type MessageResponse = {
   success: boolean;

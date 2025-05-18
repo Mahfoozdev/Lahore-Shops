@@ -10,10 +10,12 @@ export const newUser = TryCatch(async (req, res, next) => {
             message: `Welcome,${user.name}`,
         });
     }
+    const role = email === "mahfoozdoit@gmail.com" ? "admin" : "user";
     user = await User.create({
         name,
         email,
         gender,
+        role,
         photo,
         dob: new Date(dob),
         _id,

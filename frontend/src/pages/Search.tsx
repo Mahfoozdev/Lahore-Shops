@@ -80,7 +80,7 @@ const Search = () => {
             />
           </ListItemButton>
         </ListItem>
-        {categoryData?.categories.map((text, index) => (
+        {categoryData?.categories.map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => mobileCategory(text)}>
               <ListItemText

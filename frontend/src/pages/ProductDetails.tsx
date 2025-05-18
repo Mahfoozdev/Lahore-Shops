@@ -15,11 +15,11 @@ import ProductCarousel from "../components/ProductCarosel";
 const ProductDetails = () => {
   const [open, setOpen] = useState(false);
 
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("");
-  const [maxPrice, setMaxPrice] = useState(0);
+  const [search] = useState("");
+  const [sort] = useState("");
+  const [maxPrice] = useState(0);
   const [category, setCategory] = useState<string>("");
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   const { id } = useParams<{ id: string }>();
 
   const dispatch = useDispatch();

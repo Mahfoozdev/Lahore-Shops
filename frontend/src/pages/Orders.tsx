@@ -9,7 +9,7 @@ import TableHOC from "../components/TableHOC";
 
 interface DataType {
   _id: string;
-  amount: number;
+  amount: ReactElement;
   discount: number;
   quantity: number;
   status: ReactElement;
@@ -23,7 +23,7 @@ const columns: TableColumn<DataType>[] = [
   },
   {
     name: "Amount",
-    selector: (row) => row.amount,
+    cell: (row) => row.amount,
   },
 
   {
@@ -75,7 +75,9 @@ const Orders = () => {
             Manage
           </Link>
         ),
+        discount: i.discount || 0, // 👈 add this line (adjust logic as needed)
       }));
+
       setRows(mapped);
     }
   }, [data]);

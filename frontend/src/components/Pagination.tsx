@@ -12,7 +12,7 @@ export default function PaginationControlled({
   page,
   setPage,
 }: Prop) {
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (_: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
 

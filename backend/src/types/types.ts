@@ -6,6 +6,7 @@ export interface NewUserRequestBody {
   photo: string;
   email: string;
   gender: string;
+  role?: "admin" | "user";
   dob: Date;
 }
 

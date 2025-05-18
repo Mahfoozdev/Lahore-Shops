@@ -20,10 +20,14 @@ export const newUser = TryCatch(
       });
     }
 
+    const role: "admin" | "user" =
+      email === "mahfoozdoit@gmail.com" ? "admin" : "user";
+
     user = await User.create({
       name,
       email,
       gender,
+      role,
       photo,
       dob: new Date(dob),
       _id,

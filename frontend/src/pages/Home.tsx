@@ -23,11 +23,11 @@ const words = ["Journey", "Adventure", "Voyage"];
 const Home = () => {
   const [index, setIndex] = useState(0);
 
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("");
-  const [maxPrice, setMaxPrice] = useState(0);
+  const [search] = useState("");
+  const [sort] = useState("");
+  const [maxPrice] = useState(0);
   const [category, setCategory] = useState<string>("");
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
 
   const { data, isLoading, isError } = useLatestProductsQuery("");
 
@@ -134,14 +134,14 @@ const Home = () => {
       </div>
       {/*  */}
       <div className="w-full flex justify-center">
-        <main className="pt-20 w-[95%] md:w-[90%] ">
+        <main className="pt-20 w-[95%] md:w-[93%] ">
           <section className="flex flex-col lg:flex-row px-5 py-20 gap-10 md:p-10  bg-primary text-secondary w-full rounded-t-4xl lg:p-10 xl:p-0 xl:py-2 border-border border-[1px] justify-between xl:relative mb-5">
             <div className="flex flex-col gap-1 md:gap-5 md:pl-10 pl-5 lg:w-full justify-center text-center lg:text-start">
               <h2 className="xl:text-5xl font-bold md:text-[45px] text-[37px] ">
-                Check latest news
+                Check Products
               </h2>
               <p className="font-semibold pt-5 md:pt-0 leading-7">
-                Stay informed with the newest updates and news.
+                Explore a wide range of products in our store!
               </p>
             </div>
             <img
@@ -154,7 +154,7 @@ const Home = () => {
                 to="/search"
                 className="bg-secondary text-primary border border-secondary hover:text-secondary font-bold flex justify-center items-center hover:bg-primary md:py-3 lg:w-[220px] h-fit md:w-[180px] md:px-0 px-2 py-4 rounded-full text-sm md:text-lg  xl:absolute xl:top-32 xl:right-14 w-[330px] "
               >
-                Shop on our Store
+                Visit our Store
               </Link>
             </div>
           </section>
@@ -220,44 +220,47 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 text-secondary lg:grid-cols-3 gap-5 pt-10">
             <div className="px-10 py-14 bg-primary flex flex-col gap-5 items-start rounded-xl border-[0.1px] hover:border-black transition-all delay-200 ease-linear">
               <RiGlobalFill className="text-4xl" />
-              <h1 className="text-[20px]">Brand Identity Design</h1>
+              <h1 className="text-[20px]"> Product Variety</h1>
               <p className="text-secondary/80">
                 {" "}
-                Our meticulous approach combines creativity with strategic
-                thinking to develop cohesive visual identities that leave a
-                lasting impression.
+                Explore an extensive selection of products across multiple
+                categories, carefully curated to meet all your lifestyle and
+                everyday needs.
               </p>
             </div>
             <div className="px-10 py-14 bg-primary flex flex-col gap-5 items-start rounded-xl border-[0.01px] hover:border-black transition-all delay-200 ease-linear">
               <FaLeaf className="text-4xl" />
-              <h1 className="text-[20px]">Website Design</h1>
+              <h1 className="text-[20px]">Secure & Easy Checkout</h1>
               <p className="text-secondary/80">
-                Consistently provide tailored solutions for your business and
-                projects.
+                Enjoy a smooth, user-friendly shopping experience with secure
+                payment gateways and a streamlined checkout process also
+                Supports Pay on delivery.
               </p>
             </div>
             <div className="px-10 py-14 bg-primary flex flex-col gap-5 items-start rounded-xl border-[0.01px] hover:border-black transition-all delay-200 ease-linear">
               <HiNewspaper className="text-4xl" />
-              <h1 className="text-[20px]">Different Layouts</h1>
+              <h1 className="text-[20px]">User-Friendly Interface</h1>
               <p className="text-secondary/80">
-                Deliver bespoke solutions and designs for your business and
-                projects.
+                Navigate effortlessly through our store with an intuitive design
+                that makes finding and purchasing products quick and simple.
               </p>
             </div>
             <div className="px-10 py-14 bg-primary flex flex-col gap-5 items-start rounded-xl border-[0.01px] hover:border-black transition-all delay-200 ease-linear">
               <RiTruckFill className="text-4xl" />
-              <h1 className="text-[20px]">Responsiveness</h1>
+              <h1 className="text-[20px]">Fast & Reliable Delivery</h1>
               <p className="text-secondary/80">
-                Improving your website or web application's compatibility across
-                various devices.
+                We prioritize quick and dependable shipping so you receive your
+                orders promptly, with real-time tracking available at your
+                fingertips.
               </p>
             </div>
             <div className="px-10 py-14 bg-primary flex flex-col gap-5 items-start rounded-xl border-[0.01px] hover:border-black transition-all delay-200 ease-linear">
               <FaAward className="text-4xl" />
-              <h1 className="text-[20px]">Quality Assurance</h1>
+              <h1 className="text-[20px]">Verified Quality Products</h1>
               <p className="text-secondary/80">
-                Thoroughly testing and ensuring the flawless operation of your
-                application.
+                Shop with confidence knowing every item in our store is
+                carefully selected and quality-checked to ensure satisfaction
+                and durability.
               </p>
             </div>
             <div className="px-10 py-14 bg-primary flex flex-col gap-5 items-start rounded-xl border-[0.01px] hover:border-black transition-all delay-200 ease-linear">
@@ -265,8 +268,9 @@ const Home = () => {
 
               <h1 className="text-[20px]">24/7 Response</h1>
               <p className="text-secondary/80">
-                Providing prompt responses for efficient communication and
-                expedited task completion.
+                Our dedicated support team is here to help with any questions or
+                concerns, ensuring your satisfaction at every step of your
+                shopping journey.
               </p>
             </div>
           </div>

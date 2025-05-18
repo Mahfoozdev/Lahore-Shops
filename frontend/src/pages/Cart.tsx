@@ -30,10 +30,9 @@ import { server } from "../redux/store";
 import { FaRegFaceSadTear } from "react-icons/fa6";
 
 const Cart = () => {
-  const { cartItems, subtotal, discount, tax, total, shippingCharges } =
-    useSelector(
-      (state: { cartReducer: CartReducerInitialState }) => state.cartReducer
-    );
+  const { cartItems, subtotal, tax, total, shippingCharges } = useSelector(
+    (state: { cartReducer: CartReducerInitialState }) => state.cartReducer
+  );
   const { user } = useSelector(
     (state: { userReducer: UserReducerInitialState }) => state.userReducer
   );

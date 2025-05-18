@@ -71,6 +71,9 @@ const Footer = () => {
                   <li className="cursor-pointer hover:text-[grey]">
                     <Link to="/cart">Cart</Link>
                   </li>
+                  <li className="cursor-pointer hover:text-[grey]">
+                    <Link to="/contact">Contact Us</Link>
+                  </li>
                 </ul>
               </div>
               {/* 3rd div */}
@@ -99,7 +102,7 @@ const Footer = () => {
                     <Link to="/privacy-policy">Privacy Policy</Link>
                   </li>
                   <li className="cursor-pointer hover:text-[grey]">
-                    <Link to="/terms-of-use">Terms of Use</Link>
+                    <Link to="/terms-and-conditions">Terms of Use</Link>
                   </li>
                 </ul>
               </div>
