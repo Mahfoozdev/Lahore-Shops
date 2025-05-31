@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { FaPowerOff } from "react-icons/fa6";
 import { IoHomeOutline } from "react-icons/io5";
 import { CartReducerInitialState } from "../types/reducer-types";
+import logo from "../../public/LahoreShops.png";
 import { useSelector } from "react-redux";
 import {
   Avatar,
@@ -181,9 +182,9 @@ const Header = ({ user }: PropsTypes) => {
   );
   return (
     <div className="w-full flex justify-center bg-primary text-secondary">
-      <main className="lg:w-[90%] w-[95%] flex gap-32 font-bold  justify-between items-center py-5 text-xl">
+      <main className="lg:w-[90%] w-[95%] flex gap-32 font-bold  justify-between items-center pt-2 text-xl">
         <Link to="/" className="flex gap-3">
-          <h1>LS</h1> <h2 className="underline">lahoreShops</h2>
+          <img src={logo} alt="" className="h-16" />
         </Link>
 
         <div className="flex items-center gap-7 lg:hidden ">

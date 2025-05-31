@@ -2,6 +2,7 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { FaFacebookF, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import logo from "../../public/LahoreShops.png";
 const Footer = () => {
   return (
     <section>
@@ -36,12 +37,9 @@ const Footer = () => {
           <section className="flex lg:flex-row flex-col lg:gap-14 xl:gap-0 gap-10 py-24">
             {/* 1st mainDiv */}
             <div className="lg:w-[40%] w-full flex justify-center flex-col items-center md:items-start">
-              <Link to="/" className="flex font-extrabold text-3xl gap-3">
-                <h1>LS</h1> <h2 className="underline">lahoreShops</h2>
+              <Link to="/" className="flex  font-extrabold ">
+                <img src={logo} alt="" className="h-20" />
               </Link>
-              <h3 className="text-xl font-bold py-5 text-center md:text-start">
-                The Future of Shopping
-              </h3>
               <p className="  pb-10 text-center md:text-start">
                 Blending Innovation and Trust ,<br />
                 Making Shop Simple
