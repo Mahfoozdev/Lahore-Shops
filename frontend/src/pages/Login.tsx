@@ -6,12 +6,14 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { MessageResponse } from "../types/api-types";
 import { BsGoogle } from "react-icons/bs";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [gender, setGender] = useState("");
   const [date, setDate] = useState("");
   const [register, setRegister] = useState(true);
   const [login] = useLoginMutation();
+  const navigate = useNavigate();
   const loginHandler = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -29,6 +31,7 @@ const SignUp = () => {
 
       if ("data" in res) {
         toast.success(res.data?.message!);
+        navigate("/");
       } else {
         const error = res.error as FetchBaseQueryError;
         const message = (error.data as MessageResponse).message;
