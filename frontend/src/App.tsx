@@ -14,6 +14,7 @@ import { UserReducerInitialState } from "./types/reducer-types";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Payment from "./pages/Payment";
+import Whatsapp from "./components/Whatsapp";
 
 const Home = lazy(() => import("./pages/Home"));
 const Search = lazy(() => import("./pages/Search"));
@@ -61,6 +62,8 @@ function App() {
           hideProgressBar={false}
           newestOnTop
         />
+
+        <Whatsapp />
         <Suspense fallback={<Loader />} />
         <Routes>
           <Route path="/" element={<Home />} />

@@ -74,7 +74,7 @@ const Cart = () => {
             component={Paper}
             sx={{
               maxWidth: 1200,
-              background: "rgba(146, 141, 171, 0.3)",
+              background: "#0b101b",
             }}
           >
             <Table>
@@ -83,7 +83,7 @@ const Cart = () => {
                   <TableCell
                     sx={{
                       borderBottom: "1px solid #1f1c2c",
-                      color: "#928dab",
+                      color: "white",
                       fontSize: "17px",
                     }}
                   >
@@ -92,7 +92,7 @@ const Cart = () => {
                   <TableCell
                     sx={{
                       borderBottom: "1px solid #1f1c2c",
-                      color: "#928dab",
+                      color: "white",
                       fontSize: "17px",
                     }}
                   >
@@ -101,7 +101,7 @@ const Cart = () => {
                   <TableCell
                     sx={{
                       borderBottom: "1px solid #1f1c2c",
-                      color: "#928dab",
+                      color: "white",
                       fontSize: "17px",
                     }}
                   >
@@ -110,7 +110,7 @@ const Cart = () => {
                   <TableCell
                     sx={{
                       borderBottom: "1px solid #1f1c2c",
-                      color: "#928dab",
+                      color: "white",
                       fontSize: "17px",
                     }}
                   >
@@ -119,7 +119,7 @@ const Cart = () => {
                   <TableCell
                     sx={{
                       borderBottom: "1px solid #1f1c2c",
-                      color: "#928dab",
+                      color: "white",
                       fontSize: "17px",
                     }}
                   >
@@ -128,7 +128,7 @@ const Cart = () => {
                   <TableCell
                     sx={{
                       borderBottom: "1px solid #1f1c2c",
-                      color: "#928dab",
+                      color: "white",
                       fontSize: "17px",
                     }}
                   >
@@ -169,14 +169,16 @@ const Cart = () => {
                       <div className="flex items-center gap-2">
                         <Button
                           variant="contained"
+                          color="secondary"
                           size="small"
                           onClick={() => decreaseHandler(item)}
                         >
                           -
                         </Button>
-                        <span>{item.quantity}</span>
+                        <span className="text-white">{item.quantity}</span>
                         <Button
                           variant="contained"
+                          color="secondary"
                           size="small"
                           onClick={() => increaseHandler(item)}
                         >
@@ -187,7 +189,7 @@ const Cart = () => {
                     <TableCell
                       sx={{
                         borderBottom: "1px solid #1f1c2c",
-                        color: "#928dab",
+                        color: "white",
                         fontSize: "17px",
                       }}
                     >
@@ -196,7 +198,7 @@ const Cart = () => {
                     <TableCell sx={{ borderBottom: "1px solid #1f1c2c" }}>
                       <Chip
                         label="Remove"
-                        color="primary"
+                        color="secondary"
                         deleteIcon={<MdDeleteForever />}
                         onDelete={() => removingHandle(item.productId)}
                       />

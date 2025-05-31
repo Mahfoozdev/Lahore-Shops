@@ -117,32 +117,23 @@ const Footer = () => {
                 Copyright © Lahore Shops
               </h3>
               <div className="flex gap-5">
-                <div className="bg-[#131B2C] text-primary p-1 text-xl rounded-md border-[1px] border-border">
-                  <a
-                    href="https://www.facebook.com/MetaXPayments"
-                    target="_blank"
-                  >
+                <div className="bg-secondary text-primary p-1 text-xl rounded-md border-[1px] border-border">
+                  <a href="" target="_blank">
                     <FaFacebookF />
                   </a>
                 </div>
-                <div className="bg-[#131B2C] p-1 text-primary text-xl rounded-md border-[1px] border-border">
-                  <a
-                    href="https://www.instagram.com/metaxpayments/"
-                    target="_blank"
-                  >
+                <div className="bg-secondary p-1 text-primary text-xl rounded-md border-[1px] border-border">
+                  <a href="" target="_blank">
                     <RiInstagramFill />
                   </a>
                 </div>
-                <div className="bg-[#131B2C] p-1 text-primary text-xl rounded-md border-[1px] border-border">
-                  <a href="https://x.com/@MetaXPayments?mx=2" target="_blank">
+                <div className="bg-secondary p-1 text-primary text-xl rounded-md border-[1px] border-border">
+                  <a href="" target="_blank">
                     <FaXTwitter />
                   </a>
                 </div>
-                <div className="bg-[#131B2C] p-1 text-primary text-xl rounded-md border-[1px] border-border">
-                  <a
-                    href="https://www.linkedin.com/company/metaxpayments"
-                    target="_blank"
-                  >
+                <div className="bg-secondary p-1 text-primary text-xl rounded-md border-[1px] border-border">
+                  <a href="" target="_blank">
                     <FaLinkedinIn />
                   </a>
                 </div>

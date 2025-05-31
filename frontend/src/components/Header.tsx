@@ -23,6 +23,7 @@ import {
 import { RiMenu3Line } from "react-icons/ri";
 import { useState } from "react";
 import { MdLogin, MdOutlineContactPage } from "react-icons/md";
+import { FaShoppingBag } from "react-icons/fa";
 interface PropsTypes {
   user: User | null;
 }
@@ -51,7 +52,12 @@ const Header = ({ user }: PropsTypes) => {
 
   const DrawerList = (
     <Box
-      sx={{ width: 250, background: "#928dab", height: "100vh" }}
+      sx={{
+        width: 250,
+        background: "#0b101b",
+        color: "white",
+        height: "100vh",
+      }}
       role="presentation"
     >
       <List className="bg-primary">
@@ -60,7 +66,7 @@ const Header = ({ user }: PropsTypes) => {
             <Chip
               avatar={<Avatar alt={user.name} src={user.photo} />}
               title={user.name}
-              sx={{ background: "#1f1c2c", color: "#928dab" }}
+              sx={{ background: "#1f1c2c", color: "#c9c8b9" }}
               label={user.name.split(" ")[1]}
             />
           </ListItem>
@@ -79,6 +85,22 @@ const Header = ({ user }: PropsTypes) => {
               </span>
             </ListItemIcon>
             <ListItemText primary="Home" />
+          </ListItemButton>
+        </ListItem>
+
+        <ListItem disablePadding>
+          <ListItemButton
+            component={Link}
+            to="/search"
+            onClick={() => mobileCategory()}
+          >
+            <ListItemIcon sx={{ minWidth: 45 }}>
+              <span className="bg-secondary text-primary p-2 rounded-full">
+                {" "}
+                <FaShoppingBag />
+              </span>
+            </ListItemIcon>
+            <ListItemText primary="Shop" />
           </ListItemButton>
         </ListItem>
 
@@ -165,9 +187,6 @@ const Header = ({ user }: PropsTypes) => {
         </Link>
 
         <div className="flex items-center gap-7 lg:hidden ">
-          <Link to="/search" className="font-normal text-[14px]">
-            Shop
-          </Link>
           <Link
             to="/cart"
             title="Cart"
